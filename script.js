@@ -6,8 +6,8 @@ document.addEventListener('mousemove', (e) => {
     const orbs = document.querySelectorAll('.ambient-orb');
 
     orbs.forEach((orb, index) => {
-        // Parallax factor (different for each orb for depth)
-        const factor = (index + 1) * 20;
+        // Parallax factor (balanced for visibility and smoothness)
+        const factor = (index + 1) * 28;
 
         const tx = x * factor;
         const ty = y * factor;
