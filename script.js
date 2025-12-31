@@ -61,36 +61,39 @@ if (bioToggle && authorBio) {
     });
 }
 
-// Hero Video Click-to-Play
-const heroVideo = document.getElementById('heroVideo');
-const videoOverlay = document.getElementById('videoOverlay');
+// Hero Video Controls
+const heroVideo = document.querySelector('.hero-video');
 
-if (heroVideo && videoOverlay) {
-    // Play video when overlay is clicked
-    videoOverlay.addEventListener('click', () => {
-        heroVideo.muted = false; // Unmute to enable audio
-        heroVideo.currentTime = 0; // Start from beginning
-        heroVideo.play();
-        videoOverlay.classList.add('hidden');
+if (heroVideo) {
+    // Ensure video is unmuted if played through controls
+    heroVideo.addEventListener('play', () => {
+        heroVideo.muted = false;
     });
 
-    // Show overlay again when video ends
-    heroVideo.addEventListener('ended', () => {
-        videoOverlay.classList.remove('hidden');
-    });
+    // Handle Fullscreen Orientation Locking
+    const handleFullscreenChange = () => {
+        if (document.fullscreenElement === heroVideo ||
+            document.webkitFullscreenElement === heroVideo ||
+            document.mozFullScreenElement === heroVideo ||
+            document.msFullscreenElement === heroVideo) {
 
-    // Also show overlay when video is paused (optional - user can click video to pause)
-    heroVideo.addEventListener('pause', () => {
-        // Only show overlay if video is not at the beginning (avoid showing on initial load)
-        if (heroVideo.currentTime > 0 && heroVideo.currentTime < heroVideo.duration) {
-            videoOverlay.classList.remove('hidden');
+            // Entering fullscreen: Try to lock to landscape on mobile
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock('landscape').catch(err => {
+                    console.log("Orientation lock failed or not supported:", err);
+                });
+            }
+        } else {
+            // Exiting fullscreen: Unlock orientation
+            if (screen.orientation && screen.orientation.unlock) {
+                screen.orientation.unlock();
+            }
         }
-    });
+    };
 
-    // Allow clicking the video itself to pause
-    heroVideo.addEventListener('click', () => {
-        if (!heroVideo.paused) {
-            heroVideo.pause();
-        }
-    });
+    // Standard and vendor-prefixed events
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
 }
