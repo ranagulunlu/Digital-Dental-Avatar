@@ -15,9 +15,16 @@
     padding: 0;
 }
 
-html,
+html {
+    background-color: #0b0e14;
+    /* Deepest base on the root */
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-color: #0d1117;
+    background: transparent;
+    /* Must be transparent to see ambient-container */
     margin: 0;
     padding: 0;
 }
@@ -37,58 +44,52 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    /* Primary fallback */
-    height: 100svh;
-    /* Smallest viewport height for mobile browser bars */
-    z-index: -1;
+    height: 100%;
+    z-index: -2;
+    /* Lowest layer */
     overflow: hidden;
     pointer-events: none;
-    background: #0d1117;
+    background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
 }
 
 .ambient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    /* Heavy blur for soft glow */
-    opacity: 0.6;
-    animation: float 20s ease-in-out infinite alternate;
+    filter: blur(90px);
+    /* Balanced soft glow */
+    opacity: 0.7;
+    animation: float 22s ease-in-out infinite alternate;
 }
 
 /* Orb Variants */
 .orb-1 {
     top: -10%;
     left: -10%;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle at center, rgba(91, 33, 182, 0.6) 0%, rgba(91, 33, 182, 0) 75%);
-    /* Deep Purple - much softer fade */
+    width: 65vw;
+    height: 65vw;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.55) 0%, transparent 75%);
+    /* Balanced & Visible Purple */
     animation-delay: 0s;
-    will-change: transform, opacity;
 }
 
 .orb-2 {
     bottom: -10%;
     right: -10%;
-    width: 70vw;
-    height: 70vw;
-    background: radial-gradient(circle at center, rgba(3, 105, 161, 0.6) 0%, rgba(3, 105, 161, 0) 75%);
-    /* Deep Blue - much softer fade */
+    width: 75vw;
+    height: 75vw;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.5) 0%, transparent 75%);
+    /* Balanced & Visible Blue */
     animation-delay: -5s;
-    will-change: transform, opacity;
 }
 
 .orb-3 {
-    top: 30%;
-    right: 30%;
-    width: 50vw;
-    height: 50vw;
-    background: radial-gradient(circle at center, rgba(45, 212, 191, 0.3) 0%, rgba(45, 212, 191, 0) 75%);
-    /* Teal - much softer fade */
-    opacity: 0.3;
+    top: 25%;
+    right: 25%;
+    width: 55vw;
+    height: 55vw;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.4) 0%, transparent 70%);
+    /* Balanced & Visible Teal */
     animation-delay: -10s;
-    will-change: transform, opacity;
 }
 
 @keyframes float {
@@ -109,9 +110,18 @@ body {
     }
 }
 
-/* Darkening overlay is no longer needed without background image, 
-   but we can keep it for extra depth if orbs are too bright. 
-   Removing for now to simplify mobile rendering. */
+/* Balanced Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 23, 0.55);
+    /* Softer dark overlay */
+    z-index: -1;
+}
 
 .container {
     max-width: var(--container-max-width);
