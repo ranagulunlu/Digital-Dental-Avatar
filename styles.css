@@ -60,32 +60,35 @@ body {
 .orb-1 {
     top: -10%;
     left: -10%;
-    width: 50vw;
-    height: 50vw;
-    background: radial-gradient(circle, #5b21b6 0%, transparent 70%);
-    /* Deep Purple */
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle at center, rgba(91, 33, 182, 0.6) 0%, rgba(91, 33, 182, 0) 75%);
+    /* Deep Purple - much softer fade */
     animation-delay: 0s;
+    will-change: transform, opacity;
 }
 
 .orb-2 {
     bottom: -10%;
     right: -10%;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, #0369a1 0%, transparent 70%);
-    /* Deep Blue */
+    width: 70vw;
+    height: 70vw;
+    background: radial-gradient(circle at center, rgba(3, 105, 161, 0.6) 0%, rgba(3, 105, 161, 0) 75%);
+    /* Deep Blue - much softer fade */
     animation-delay: -5s;
+    will-change: transform, opacity;
 }
 
 .orb-3 {
     top: 30%;
     right: 30%;
-    width: 40vw;
-    height: 40vw;
-    background: radial-gradient(circle, #2dd4bf 0%, transparent 70%);
-    /* Teal */
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle at center, rgba(45, 212, 191, 0.3) 0%, rgba(45, 212, 191, 0) 75%);
+    /* Teal - much softer fade */
     opacity: 0.3;
     animation-delay: -10s;
+    will-change: transform, opacity;
 }
 
 @keyframes float {
